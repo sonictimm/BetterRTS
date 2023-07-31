@@ -1,0 +1,101 @@
+
+
+######                                   ######  #######  #####  
+#     # ###### ##### ##### ###### #####  #     #    #    #     # 
+#     # #        #     #   #      #    # #     #    #    #       
+######  #####    #     #   #####  #    # ######     #     #####  
+#     # #        #     #   #      #####  #   #      #          # 
+#     # #        #     #   #      #   #  #    #     #    #     # 
+######  ######   #     #   ###### #    # #     #    #     #####  
+
+
+BetterRTS Camera System
+
+
+1 Overview
+2 Core Classes
+3 Additional Notes / Recommendations
+
+
+1 Overview & Features
+This plugin contains all the code required for a basic RTS-style Top-Down Camera system.
+
+*** Open BetterRTSCamera/Maps/DemoMap for a working example of the plugin in use. ***
+
+The scope is limited to the camera system (no minimap, etc.)
+The camera can be panned (moved) by moving the cursor to the edge of the screen, 
+or through a keyboard input.
+The camera can also be zoomed in / out and rotated at configurable speeds.
+Acceleration can be applied to all these camera movements.
+Camera can also be set to follow a specific actor, like in a MOBA
+
+Inputs go through the Enhanced Input System.
+
+2 Core Classes
+
+Use the Blueprint versions when applicable
+
+<< BetterRTSCam PlayerSetupActor >>
+One should be placed in each map in which you intend to use the BetterRTS Camera plugin.
+
+Under the Actor Details -> Camera Setup -> Pan Area, set up the Pan Area for all cameras.
+The Pan Area is the area which the cameras are restricted to.  
+If circluar, they will stay within [Pan Radius] units of the [Pan Origin]
+If Rectangular, they will use Rectangle Pan Distance's X and Y to determine how far from the origin the camera is allowed.
+The Pan Area is visualized in the Editor Viewport.  
+However, when changing it, the old Pan Area will also be visualized.  Reload the map to get rid of all old Pan Area visualizations.
+
+Add one or more BP_BetterRTSCan_StartPosition Actors as children to the Player Setup Actor.  The locations of these children will determine the start locations for the player cameras.
+
+<< Better RTS Cam Start Position >>
+Child one or more of these actors to the Player Setup Actor in the Level Outliner.  
+These will determine the start locations for each player camera.
+
+Place them in the correct start positions for each player using the Editor Viewport.
+Make sure they are inside the Pan Area.
+
+
+<< BetterRTS Camera Subsystem >>
+Provides quick and easy access to common RTS Camera functions.
+If a camera-related function is not exposed here, use GetCameraPawn to 
+access the Pawn directly and call the desired function.
+
+<< BetterRTS Player Pawn >>
+The Camera is attached to this pawn. As a result,
+"Camera Movement" and "Pawn Movement" can generally be used interchangeably.
+Functions to Pan, Zoom, Rotate, Follow, and more reside here, along with logic to accept 
+inputs that trigger these functions.
+
+The "Pan Area" limits where the camera can move so that it can't leave the map.
+Use the Player Setup Actor to set up Pan Area for all Player Pawns at once.
+
+
+<< BetterRTS Player Controller >>
+Logic for controlling the camera which cannot be implemented properly in Player Pawn goes here.
+Specifically, code in this class checks the position of the mouse cursor WRT the edge pixels of the main viewport's window.
+If the cursor is on an edge pixel, appropriate functions are called to pan the camera.  Panning is done in the Pawn.
+
+
+3 Additional Notes / Recommendations
+
+See BP & Code Comments within the Plugin for further documentation.
+
+When adjusting the Camera Bounds, the old boundaries will still be visualized.
+To get rid of all but the latest camera boundary visualizations, Re-Lo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
