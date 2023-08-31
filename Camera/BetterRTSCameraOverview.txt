@@ -11,6 +11,9 @@
 
 BetterRTS Camera System
 
+Marketplace: https://www.unrealengine.com/marketplace/en-US/product/betterrts-camera-system
+Video Preview: https://youtu.be/w1ryV8HKFU0
+Forum Topic: https://forums.unrealengine.com/t/rts-camera-top-down-camera-system/1254492
 
 1 Overview
 2 Core Classes
